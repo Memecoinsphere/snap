@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Snapchat">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; manifest-src 'self'; worker-src 'self'; form-action 'none'">
+<title>Snapchat</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="64x64" href="icons/icon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Decoy: Snapchat-style login lookalike (cosmetic only). Double-tap top ~15% for passcode. -->
+<section id="decoy" class="screen" aria-hidden="false">
+  <div class="snap-inner">
+    <!-- Original simple ghost silhouette (not an official logo) -->
+    <svg class="snap-ghost" viewBox="0 0 120 140" aria-hidden="true" role="img">
+      <path fill="#FFFFFF" d="M60 8c-22 0-40 16-40 40v28c0 4-3 6-6 8-4 2-6 6-4 10 2 4 6 5 10 4 3-1 5 0 6 3 2 6 8 12 16 14 4 1 7-1 8-4 1-3 3-4 6-4s5 1 6 4c1 3 4 5 8 4 8-2 14-8 16-14 1-3 3-4 6-3 4 1 8 0 10-4 2-4 0-8-4-10-3-2-6-4-6-8V48C100 24 82 8 60 8z"/>
+      <circle cx="42" cy="52" r="7" fill="#1a1a1a"/>
+      <circle cx="78" cy="52" r="7" fill="#1a1a1a"/>
+      <ellipse cx="60" cy="72" rx="10" ry="6" fill="#1a1a1a"/>
+    </svg>
+    <h1 class="snap-brand">Snapchat</h1>
+    <form class="snap-form" id="snapForm" autocomplete="off" onsubmit="return false;">
+      <label class="snap-field">
+        <span class="snap-label">Nom d'utilisateur</span>
+        <input type="text" id="snapUser" name="username" autocomplete="off" spellcheck="false" inputmode="text">
+      </label>
+      <label class="snap-field">
+        <span class="snap-label">Mot de passe</span>
+        <input type="password" id="snapPass" name="password" autocomplete="off">
+      </label>
+      <button type="button" id="snapLoginBtn" class="snap-btn">Se connecter</button>
+      <p id="snapError" class="snap-error" hidden>Identifiants incorrects</p>
+    </form>
+  </div>
+</section>
+
+<!-- Passcode screen (hidden until gesture) -->
+<section id="lock" class="screen" hidden>
+  <div class="lock-inner">
+    <svg class="lock-glyph" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 1 1 6 0v3H9V7zm3 7a1.5 1.5 0 0 1 .75 2.79V19h-1.5v-2.21A1.5 1.5 0 0 1 12 12z"/>
+    </svg>
+    <h1 class="lock-title">Code d'accès</h1>
+    <p class="lock-sub">Entrez le code</p>
+    <div id="dots" class="dots" aria-live="polite">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <p id="lockError" class="lock-error" hidden>Code incorrect</p>
+    <div class="keypad" id="keypad">
+      <button type="button" data-k="1">1</button>
+      <button type="button" data-k="2">2</button>
+      <button type="button" data-k="3">3</button>
+      <button type="button" data-k="4">4</button>
+      <button type="button" data-k="5">5</button>
+      <button type="button" data-k="6">6</button>
+      <button type="button" data-k="7">7</button>
+      <button type="button" data-k="8">8</button>
+      <button type="button" data-k="9">9</button>
+      <button type="button" class="ghost" tabindex="-1" aria-hidden="true"></button>
+      <button type="button" data-k="0">0</button>
+      <button type="button" data-k="del" class="del" aria-label="Supprimer">⌫</button>
+    </div>
+  </div>
+</section>
+
+<!-- Private panel -->
+<section id="panel" class="screen" hidden>
+  <header class="panel-header">
+    <h1>Espace privé</h1>
+  </header>
+  <main class="panel-body">
+    <nav class="link-list" aria-label="Liens privés">
+      <a class="link-card" href="https://memecoinsphere.github.io/" target="_self" rel="noopener">
+        <span class="link-title">Graph</span>
+        <span class="link-sub">memecoinsphere.github.io</span>
+      </a>
+      <a class="link-card" href="https://memecoinsphere.github.io/shadowhub/" target="_self" rel="noopener">
+        <span class="link-title">Shadow Hub</span>
+        <span class="link-sub">memecoinsphere.github.io/shadowhub</span>
+      </a>
+    </nav>
+    <button type="button" id="lockPanelBtn" class="lock-panel-btn">Verrouiller</button>
+  </main>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

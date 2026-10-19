@@ -1,0 +1,45 @@
+Snapchat (leurre) — guide d'utilisation (français)
+==================================================
+
+IMPORTANT — Ceci est une application LEURRE
+-------------------------------------------
+L'écran jaune « Snapchat » (connexion) est purement cosmétique.
+Les champs Nom d'utilisateur / Mot de passe et le bouton « Se connecter »
+ne font AUCUNE authentification réelle. Aucun appel réseau depuis l'app
+(CSP connect-src 'none'). C'est un écran de couverture pour un panneau privé.
+
+Installation sur iPhone
+-----------------------
+1. Ouvrez le site dans Safari.
+2. Appuyez sur le bouton Partager (carré avec flèche vers le haut).
+3. Choisissez « Sur l'écran d'accueil », puis Ajouter.
+4. Lancez « Snapchat » depuis l'écran d'accueil (mode autonome).
+
+Déverrouillage (geste caché)
+----------------------------
+Au lancement, l'écran affiche une fausse page de connexion Snapchat (jaune).
+Ce n'est PAS l'écran de code.
+
+Pour révéler l'écran de code :
+  → Double-tapez rapidement près du HAUT de l'écran
+    (bandeau supérieur, environ les 15 % du haut).
+
+Puis saisissez le code : 6767
+
+Code d'accès
+------------
+Code actuel : 6767
+
+Pour le changer, éditez dans app.js la constante clairement marquée :
+  // ===== PASSCODE (change here) =====
+  const PASSCODE = "6767";
+
+Espace privé
+------------
+Après déverrouillage : liens vers Graph et Shadow Hub (même onglet),
+et un bouton rouge « Verrouiller » qui renvoie au leurre Snapchat.
+Le geste caché est à nouveau nécessaire pour revenir.
+
+Fichiers
+--------
+Tout est statique (HTML/CSS/JS), sans étape de build ni CDN externe.

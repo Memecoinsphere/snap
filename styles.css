@@ -1,0 +1,342 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+:root {
+  --bg: #000000;
+  --bg-elevated: #1c1c1e;
+  --label: #8e8e93;
+  --text: #ffffff;
+  --danger: #ff453a;
+  --snap-yellow: #FFFC00;
+  --snap-ink: #1a1a1a;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  overscroll-behavior: none;
+}
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+}
+
+.screen[hidden] { display: none !important; }
+
+/* ----- Decoy: Snapchat-style login ----- */
+#decoy {
+  background: var(--snap-yellow);
+  color: var(--snap-ink);
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.snap-inner {
+  width: 100%;
+  max-width: 360px;
+  padding: 32px 28px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.snap-ghost {
+  width: 88px;
+  height: 102px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+}
+
+.snap-brand {
+  margin: 0 0 36px;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--snap-ink);
+  font-family: var(--font);
+  border-radius: 0;
+}
+
+.snap-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.snap-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.snap-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.55);
+  padding-left: 4px;
+}
+
+.snap-field input {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--snap-ink);
+  font-size: 16px;
+  font-family: inherit;
+  padding: 14px 16px;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.snap-field input:focus {
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.18);
+}
+
+.snap-btn {
+  margin-top: 8px;
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  background: var(--snap-ink);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.snap-btn:active {
+  opacity: 0.85;
+}
+
+.snap-error {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c41e1e;
+  min-height: 18px;
+}
+
+.snap-error[hidden] { display: none; }
+
+/* ----- Lock / passcode ----- */
+#lock {
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.lock-inner {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 48px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lock-glyph {
+  width: 36px;
+  height: 36px;
+  color: var(--text);
+  opacity: 0.9;
+  margin-bottom: 16px;
+}
+
+.lock-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.lock-sub {
+  margin: 8px 0 0;
+  font-size: 15px;
+  color: var(--label);
+}
+
+.dots {
+  display: flex;
+  gap: 16px;
+  margin: 28px 0 8px;
+  min-height: 14px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid #8e8e93;
+  background: transparent;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.dot.filled {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.lock-error {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--danger);
+  min-height: 18px;
+}
+
+.lock-error[hidden] { display: none; }
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 76px);
+  gap: 16px 22px;
+  margin-top: 28px;
+  justify-content: center;
+}
+
+.keypad button {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: none;
+  background: #1c1c1e;
+  color: var(--text);
+  font-size: 28px;
+  font-weight: 400;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keypad button:active:not(.ghost) {
+  background: #3a3a3c;
+}
+
+.keypad button.ghost {
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.keypad button.del {
+  background: transparent;
+  font-size: 22px;
+  color: var(--text);
+}
+
+/* ----- Panel: Espace privé ----- */
+#panel {
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 8px;
+  flex-shrink: 0;
+}
+
+.panel-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 16px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  background: var(--bg-elevated);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-card:active {
+  opacity: 0.8;
+}
+
+.link-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.link-sub {
+  font-size: 13px;
+  color: var(--label);
+}
+
+.lock-panel-btn {
+  display: block;
+  width: 100%;
+  margin-top: auto;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  color: var(--danger);
+  font-size: 17px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: center;
+}
+
+.lock-panel-btn:active {
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot { transition: none; }
+}
